@@ -1,10 +1,13 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EvaluationService {
+public class EvaluationService 
+{
 
 	/**
 	 * 1. Without using the StringBuilder or StringBuffer class, write a method that
@@ -13,9 +16,26 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String reverse(String string) 
+	{
+		// Step 1: Use length of string to iterate backwards through string (if string is 5 long, loop will be 0 - 4.
+				// Step 2: Concatenate each character onto a new string.
+				// Step 3: Return the new string. 
+		int stringLen = string.length();
+		String backwardsString = "";
+		
+		System.out.println("String len: " + stringLen);
+		
+		for (int i = stringLen - 1; i >= 0; --i)
+		{
+			System.out.println("Index is: " + i);
+			System.out.println("Value at index: " + backwardsString + string.charAt(i));
+			backwardsString = backwardsString + string.charAt(i);
+			System.out.println("String so far: " + backwardsString);
+			System.out.println();
+		}
+		
+		return backwardsString;
 	}
 
 	/**
@@ -26,9 +46,22 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String acronym(String phrase) 
+	{
+		String acronym = "";
+		String wordArray[] = phrase.split(" ");
+		int arrayLength = wordArray.length;
+		
+		for(String s : wordArray)
+		{
+			System.out.println("s is: " + s);
+			acronym = acronym + s.charAt(0);
+			System.out.println("acronym is now: " + acronym);
+		}
+		acronym.toUpperCase();
+		System.out.println(acronym);
+		
+		return acronym;
 	}
 
 	/**
@@ -40,61 +73,101 @@ public class EvaluationService {
 	 * different lengths.
 	 *
 	 */
-	static class Triangle {
+	static class Triangle 
+	{
 		private double sideOne;
 		private double sideTwo;
 		private double sideThree;
 
-		public Triangle() {
+		public Triangle() 
+		{
 			super();
 		}
 
-		public Triangle(double sideOne, double sideTwo, double sideThree) {
+		public Triangle(double sideOne, double sideTwo, double sideThree) 
+		{
 			this();
 			this.sideOne = sideOne;
 			this.sideTwo = sideTwo;
 			this.sideThree = sideThree;
 		}
 
-		public double getSideOne() {
+		public double getSideOne() 
+		{
 			return sideOne;
 		}
 
-		public void setSideOne(double sideOne) {
+		public void setSideOne(double sideOne) 
+		{
 			this.sideOne = sideOne;
 		}
 
-		public double getSideTwo() {
+		public double getSideTwo() 
+		{
 			return sideTwo;
 		}
 
-		public void setSideTwo(double sideTwo) {
+		public void setSideTwo(double sideTwo) 
+		{
 			this.sideTwo = sideTwo;
 		}
 
-		public double getSideThree() {
+		public double getSideThree() 
+		{
 			return sideThree;
 		}
 
-		public void setSideThree(double sideThree) {
+		public void setSideThree(double sideThree) 
+		{
 			this.sideThree = sideThree;
 		}
 
-		public boolean isEquilateral() {
+		public boolean isEquilateral() 
+		{
 			// TODO Write an implementation for this method declaration
-			return false;
+			getSideOne();
+			getSideTwo();
+			getSideThree();
+			
+			if ((sideOne == sideTwo) && (sideOne == sideThree))
+			{
+				System.out.println("All sides are equal!");
+				return true;
+			}
+			else
+			{
+				System.out.println("All sides are not equal!");
+				return false;	
+			}
 		}
 
-		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+		public boolean isIsosceles() 
+		{
+			getSideOne();
+			getSideTwo();
+			getSideThree();
+			
+			if ((sideOne == sideTwo) || (sideTwo == sideThree) || (sideThree == sideOne))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
-		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+		public boolean isScalene() 
+		{
+			if ((sideOne != sideTwo) && (sideOne != sideThree))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
-
 	}
 
 	/**
@@ -112,9 +185,85 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+	public int getScrabbleScore(String string) 
+	{
+		HashMap<String, Integer>scrabbleStorage = new HashMap<>();
+		
+		String onePoint[] = {"a", "A" , "e", "E", "i", "I", "o", "O", "u", "U", "l", "L", "n", "N", "r", "R", "s", "S", "t", "T"};
+		String twoPoints[] = {"d", "D", "g" ,"G"};
+		String threePoints[] = {"b", "B", "c", "C",  "m", "M", "p", "P"};
+		String fourPoints [] = {"f", "F", "h", "H", "v", "V", "w", "W", "y", "Y"};
+		String fivePoints [] = {"k", "K"};
+		String eightPoints[] = {"j" , "J", "x", "X"};
+		String tenPoints[] = {"q", "Q", "z", "Z"};
+		
+		//add onePoint to the map
+		int onePointLength = onePoint.length;
+		for (int i = 0; i < onePointLength; ++i)
+		{
+			scrabbleStorage.put(onePoint[i] , 1);
+		}
+		
+		// add twoPoints to the map
+		int twoPointsLength = twoPoints.length;
+		for (int i = 0; i < 2; ++i)
+		{
+			scrabbleStorage.put(twoPoints[i] , twoPointsLength);
+		}
+		
+		// add threePoints to the map
+		int threePointsLength = threePoints.length;
+		for (int i = 0; i < threePointsLength; ++i)
+		{
+			scrabbleStorage.put(threePoints[i] , 3);
+		}
+		
+		// add FourPoints to the map
+		int fourPointsLength = fourPoints.length;
+		for (int i = 0; i < fourPointsLength; ++i)
+		{
+			scrabbleStorage.put(fourPoints[i] , 4);
+		}
+		
+		int fivePointsLength = fivePoints.length;
+		for (int i = 0; i < fivePointsLength; ++i)
+		{
+			scrabbleStorage.put(fivePoints[i] , 5);
+		}
+		
+		
+		// add eightPoints to the map
+		int eightPointsLength = eightPoints.length;
+		for (int i = 0; i < eightPointsLength; ++i)
+		{
+			scrabbleStorage.put(eightPoints[i] , 8);
+		}
+		// add tenPoints to the map
+		int tenPointsLength = tenPoints.length;
+		for (int i = 0; i < tenPointsLength; ++i)
+		{
+			scrabbleStorage.put(tenPoints[i] , 10);
+		}
+		
+		System.out.println(scrabbleStorage);
+		
+		int stringLen = string.length();
+		int score = 0;
+		char letter;
+		String word = "";
+		for (int i = 0; i < stringLen; ++i)
+		{
+			letter = string.charAt(i);
+			// converts char letter to a string
+			String letterToFind = "" + letter;
+			word = word + letter;
+			//System.out.println(word);
+			//System.out.println("The current letter evalu	ates to a score of: " + scrabbleStorage.get(letterToFind));
+			score += scrabbleStorage.get(letterToFind);
+			//System.out.println("The score total currently is " + score);
+		}
+		
+		return score;
 	}
 
 	/**
@@ -148,10 +297,75 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String cleanPhoneNumber(String string)
+	{
+		StringBuilder dirtyString = new StringBuilder(string);
+		System.out.println("Starting String is: " + dirtyString);
+		String cleanString = new String("");
+		boolean tooLong = false;
+		boolean invalidCharPresent = false;
+		int stringLen = string.length();
+		
+		// test for invalid characters
+		char nonNumericChars[] = {'!','@','#','$','%','^','&','*', ':', ';'};
+		
+		char validChars[] = {'0','1','2','3','4','5','6','7','8','9'};
+		
+		
+		// iterate over string to be cleaned
+		for (int i = 0; i < stringLen; ++i)
+		{
+			boolean validChar = false;
+			char beingExamined = string.charAt(i);
+			System.out.println("Index is: " + i + " and currently iterating over: " + beingExamined);
+			
+			// check index for membership with necessary characters
+			for(int j = 0; j < 10; ++j)
+			{
+				if (beingExamined == nonNumericChars[j])
+				{
+					System.out.println("Invalid char found!");
+					invalidCharPresent = true;
+					break;
+				}
+				
+				if (beingExamined == validChars[j])
+				{
+					validChar = true;
+				}
+			}
+			
+			// if valid char is true, add it to the new string
+			if (validChar)
+			{
+				cleanString = cleanString + beingExamined;
+				System.out.println(cleanString);
+			}
+		}
+		
+		// test for length
+		int cleanLen = cleanString.length();
+		System.out.println("Clean len: " + cleanLen);
+		if (cleanLen > 11)
+		{
+			tooLong = true;
+		}
+		boolean invalidString = (tooLong || invalidCharPresent);
+		System.out.println("Invalid string: " + invalidString);
+		System.out.println("Too long? " + tooLong);
+		System.out.println("Invalid char present? " + invalidCharPresent);
+		
+		if (invalidString)
+		{
+			throw new IllegalArgumentException();
+		}
+		else
+		{
+			System.out.println("No exceptions! Returning!");
+			return cleanString;
+		}
 	}
+
 
 	/**
 	 * 6. Given a phrase, count the occurrences of each word in that phrase.
@@ -162,9 +376,35 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public Map<String, Integer> wordCount(String string) 
+	{
+		HashMap<String, Integer> wordCount = new HashMap<>();
+		String wordArray[] = string.split(",| ");
+		
+		int frequency = 1;
+		
+		for (String word : wordArray)
+		{
+			System.out.println("Now testing: " + word);
+			if (wordCount.containsKey(word))
+			{
+				// add 1 to registered key
+				System.out.println("We found " + word + " in the map!");
+				int newValue = wordCount.get(word) + 1;
+				wordCount.put(word, newValue);				
+				System.out.println("The key is now: " + word + " and the value is: " + newValue);
+			}
+			else
+			{
+				// insert word into array and make key
+				System.out.println("We did not find " + word + " in the map!");
+				wordCount.put(word, frequency);
+				System.out.println("The key is now: " + word + " and the value is: " + frequency);
+			}
+			
+		}
+		
+		return wordCount;
 	}
 
 	/**
@@ -202,25 +442,79 @@ public class EvaluationService {
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 * 
 	 */
-	static class BinarySearch<T> {
+	
+	
+	// MOVE COMAPRABLE INTO THE GENERIC BRACKETS
+	static class BinarySearch<T extends Comparable<T>> 
+	{
 		private List<T> sortedList;
 
-		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
+		public int indexOf(T t) 
+		{	
+			System.out.println(sortedList);
+			int size = sortedList.size();
+			int lower = 0;
+			int upper = size - 1;
+			int mid = (lower + upper) / 2;
+			int comparisonResult;
+			T valueInMid;
+			
+			while (lower <= upper)
+			{
+				mid = (lower + upper) / 2;
+				System.out.println("Mid is index " + mid);
+				System.out.println("Upper index is: " + upper);
+				System.out.println("Lower index is: " + lower);
+				valueInMid = sortedList.get(mid);
+				comparisonResult = t.compareTo(valueInMid);
+				System.out.println("Comparing value in index: " + valueInMid + " and desired result: " + t);
+				if (comparisonResult > 0)
+				{
+					System.out.println(t + " is greater than the value contained in mid, which is " + valueInMid);
+					System.out.println("We need to move our lower bound");
+					lower = mid + 1;
+					System.out.println("Lower bound moved to: " + lower);
+					
+				}
+				else if(comparisonResult < 0)
+				{
+					System.out.println(t + " is less than the value contained in mid, which is: " + mid);
+					System.out.println("We need to move our upper bound");
+					upper = mid - 1;
+					System.out.println("Upper bound moved to: " + upper);
+				}
+				// if they are equal
+				else
+				{
+					System.out.println(t + " is equal to the value contained in mid, which is: " + mid);
+					return mid;
+				}
+				
+			}
 			return 0;
 		}
 
-		public BinarySearch(List<T> sortedList) {
+		public BinarySearch(List<T> sortedList) 
+		{
 			super();
 			this.sortedList = sortedList;
 		}
 
-		public List<T> getSortedList() {
+		public List<T> getSortedList() 
+		{
 			return sortedList;
 		}
 
-		public void setSortedList(List<T> sortedList) {
+		public void setSortedList(List<T> sortedList) 
+		{
+		
 			this.sortedList = sortedList;
+		}
+
+		public int compareTo(Object o) 
+		{
+			
+			return 0;
 		}
 
 	}
@@ -241,9 +535,42 @@ public class EvaluationService {
 	 * @param input
 	 * @return
 	 */
-	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
+	public boolean isArmstrongNumber(int input) 
+	{
+		// AutoBox the integer and convert it to a string
+		Integer inputAsObject = new Integer(input);
+		String inputAsString = inputAsObject.toString();
+		
+		// Use inputLen to hold the number of digits our value has
+		int inputLen = inputAsString.length();
+		//System.out.println(inputLen);
+		
+		// Convert the temporary string back to an integer
+		// Put each element of the string into an array of Integers
+		char inputAsCharArray[] = inputAsString.toCharArray();
+		int digit;
+		int digitRaisedToPower;
+		int sumOfRaisedDigits = 0;
+		
+		for (int i = 0; i < inputLen; ++i)
+		{
+			 Character singleChar = new Character(inputAsCharArray[i]);
+			 digit = singleChar.getNumericValue(singleChar);
+			 //System.out.println(digit);
+			 digitRaisedToPower = (int) Math.pow(digit, inputLen);
+			 //System.out.println(digitRaisedToPower);
+			 sumOfRaisedDigits += digitRaisedToPower;
+			 System.out.println(sumOfRaisedDigits);
+		}
+		
+		if(sumOfRaisedDigits == input)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -259,9 +586,48 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isPangram(String string) {
+	public boolean isPangram(String string)
+	{
 		// TODO Write an implementation for this method declaration
-		return false;
+		
+		char alphabet[] = {'a', 'b', 'c', 'd','e','f','g','h','i','j','k','l',
+		'm','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+		int length = string.length();
+		char charArray[] = string.toCharArray();
+		
+		char letterInString;
+		char alphabetCharToReplace;
+		// this for loop scans through the input, which has been placed in a char array.
+		for (int i = 0; i < length; ++i)
+		{
+			letterInString = charArray[i];
+			System.out.println(letterInString);
+			
+			// iterates through the alphabet array with the current letter
+			// replaces the alphabet array index with a zero if that letter is found
+			// this should mean a pangram replaces all letters with zeros.
+			for (int alphabetIndex = 0; alphabetIndex < 26; ++alphabetIndex)
+			{
+				alphabetCharToReplace = alphabet[alphabetIndex];
+				if (alphabetCharToReplace == letterInString)
+				{
+					alphabet[alphabetIndex] = '0';
+				}
+			}
+
+			//System.out.println("The alphaet has been searched. Results: ");
+		}
+		
+		// checks the alphabet array for any remaining letters
+		for (int index = 0; index < 26; ++index)
+		{
+			if (alphabet[index] != '0')
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	
@@ -291,17 +657,89 @@ public class EvaluationService {
 	 * gur ynml qbt. ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. gives The
 	 * quick brown fox jumps over the lazy dog.
 	 */
-	static class RotationalCipher {
+	static class RotationalCipher 
+	{
 		private int key;
 
-		public RotationalCipher(int key) {
+		public RotationalCipher(int key)
+		{
 			super();
 			this.key = key;
 		}
 
-		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+		public String rotate(String string) 
+		{
+			
+			HashMap<Character, Integer> defaultPositionLowercase = new HashMap<>();
+			HashMap<Character, Integer> defaultPositionUppercase = new HashMap<>();
+			
+			char lowerAlphabet[] = {'a', 'b', 'c', 'd','e','f','g','h','i','j','k','l',
+					'm','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+			
+			char upperAlphabet[] = {'A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M',
+					'N','O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+			
+			
+			// put alphabet into respective hashMaps
+			int positionCounter = 0;
+			for (int alphabetIndex = 0; alphabetIndex < 26; ++alphabetIndex)
+			{
+				defaultPositionLowercase.put(lowerAlphabet[alphabetIndex], positionCounter);
+				defaultPositionUppercase.put(upperAlphabet[alphabetIndex], positionCounter);
+				++positionCounter;
+			}
+			
+			System.out.println(defaultPositionLowercase);
+			System.out.println(defaultPositionUppercase);
+
+			
+			// put input into character array
+			int inputLen = string.length();
+			char inputArray[] = string.toCharArray();
+			char inputChar;
+			int unmathedKey;
+			int mathedKey;
+			char cipheredChar;
+			boolean nonAlphabetic;
+			String cipheredString = "";
+			//System.out.println(inputArray);
+			
+			for (int inputIndex = 0; inputIndex < inputLen; ++inputIndex)
+			{
+				inputChar = inputArray[inputIndex];
+				nonAlphabetic = !(Character.isAlphabetic(inputChar));
+				if (Character.isUpperCase(inputChar))
+				{
+					System.out.println(inputChar + " is uppercase!");
+					unmathedKey = defaultPositionUppercase.get(inputChar);
+					System.out.println("Unaltered key is: " + unmathedKey);
+					mathedKey = (unmathedKey + key) % 26;
+					System.out.println("Mathed key is " + mathedKey);
+					cipheredChar = upperAlphabet[mathedKey];
+					System.out.println("Final Char is: " + cipheredChar);
+					cipheredString = cipheredString + cipheredChar;
+					System.out.println(cipheredString);
+				}
+				else if (Character.isLowerCase(inputChar))
+				{
+					System.out.println(inputChar + " is lowercase!");
+					unmathedKey = defaultPositionLowercase.get(inputChar);
+					System.out.println("Unaltered key is: " + unmathedKey);
+					mathedKey = (unmathedKey + key) % 26;
+					System.out.println("Mathed key is " + mathedKey);
+					cipheredChar = lowerAlphabet[mathedKey];
+					System.out.println("Final Char is: " + cipheredChar);
+					cipheredString = cipheredString + cipheredChar;
+					System.out.println(cipheredString);
+				}
+				
+				else if (nonAlphabetic)
+				{
+					cipheredString = cipheredString + inputChar;
+				}
+			}
+			
+			return cipheredString;
 		}
 
 	}
@@ -331,18 +769,108 @@ public class EvaluationService {
 	 * rxpyi ldmul cqfnk hlevi gsvoz abwlt gives thequickbrownfoxjumpsoverthelazydog
 	 *
 	 */
-	static class AtbashCipher {
+	static class AtbashCipher 
+	{
 
 		/**
 		 * Question 11
 		 * 
 		 * @param string
 		 * @return
+		 * 
 		 */
-		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+		public static String encode(String string)
+		{
+			HashMap<Character, Character> mapForAllInputs = new HashMap<>();
+			
+			char lowerAlphabet[] = {'a', 'b', 'c', 'd','e','f','g','h','i','j','k','l',
+					'm','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+			
+			char upperAlphabet[] = {'A', 'B', 'C', 'D', 'E','F','G','H','I','J','K','L','M',
+					'N','O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+			
+			// put all possible letters in hashMap.
+			int decrementer = 25;
+			for (int alphabetIndex = 0; alphabetIndex < 26; ++alphabetIndex)
+			{
+				mapForAllInputs.put(lowerAlphabet[alphabetIndex], lowerAlphabet[decrementer]);
+				mapForAllInputs.put(upperAlphabet[alphabetIndex], lowerAlphabet[decrementer]);
+				decrementer--;
+				
+			}
+			
+			System.out.println(mapForAllInputs);
+
+			// put input into charArray
+			
+			int inputLen = string.length();
+			char inputArray[] = string.toCharArray();
+			char inputChar;
+			char cipheredChar;
+			boolean alphabetic;
+			boolean numeric;
+			boolean otherChar;
+			String cipheredString = "";
+			int group = 0;
+			System.out.println(inputArray);
+			
+			// build the cipheredString
+			for (int inputIndex = 0; inputIndex < inputLen; ++inputIndex)
+			{
+				inputChar = inputArray[inputIndex];
+				alphabetic = (Character.isAlphabetic(inputChar));
+				numeric = Character.isDigit(inputChar);
+				otherChar = !(alphabetic || numeric);
+				
+				if (alphabetic)
+				{
+					System.out.println(inputChar + " is alphabetic!");
+					cipheredChar = mapForAllInputs.get(inputChar);
+					//System.out.println(cipheredChar + " is the key for " + inputChar);
+					cipheredString += cipheredChar;
+					System.out.println("cipheredString: " + cipheredString);
+				}
+				else if (numeric)
+				{
+					System.out.println(inputChar + " is numeric!");
+					cipheredChar = inputChar;
+					cipheredString += cipheredChar;
+				}
+				else if (otherChar)
+				{
+					System.out.println(inputChar + " is neither alphabetic nor numeric");
+					System.out.println("cipheredString: " + cipheredString);
+				}
+				else
+				{
+					System.out.println(inputChar + " is something else you haven't accounted for!");
+					System.out.println("cipheredString: " + cipheredString);
+				}
+			}
+			
+			// insert spaces where necessary
+			int cipheredLen = cipheredString.length();
+			String finalString = "";
+			char addChar;
+			for (int i = 0; i < cipheredLen; ++i)
+			{
+				System.out.println(cipheredString.charAt(i) + " is char " + group + " in the string");
+				if (group == 5)
+				{
+					finalString += ' ';
+					group = 0;
+				}
+				addChar = cipheredString.charAt(i);
+				finalString += addChar;
+				System.out.println(finalString);
+				group++;
+			}
+			
+			return finalString;
 		}
+		
+	
+		
 
 		/**
 		 * Question 12
@@ -350,12 +878,92 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
-		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+		public static String decode(String string) 
+		{
+			// remove all spaces from input
+			int stringLen = string.length();
+			char inputChar;
+			String noSpaces = "";
+			for (int i = 0; i < stringLen; ++i)
+			{
+				inputChar = string.charAt(i);
+				if (inputChar == ' ')
+				{
+					continue;
+				}
+				else
+				{
+					noSpaces += inputChar;
+				}
+				System.out.println("Building noSpace string! " + noSpaces);
+			}
+			
+			
+			// initialize map to decode
+			char lowerAlphabet[] = {'a', 'b', 'c', 'd','e','f','g','h','i','j','k','l',
+					'm','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+			
+			HashMap<Character, Character> decoder = new HashMap<>();
+			int decrementer = 25;
+			for (int alphabetIndex = 0; alphabetIndex < 26; ++alphabetIndex)
+			{
+				decoder.put(lowerAlphabet[alphabetIndex], lowerAlphabet[decrementer]);
+				decrementer--;
+			}
+			System.out.println(decoder);
+			
+			
+			// take values from noSpace string and decode them
+			int noSpaceLen = noSpaces.length();
+			char encodedChar;
+			char decodedChar;
+			boolean alphabetic;
+			boolean numeric;
+			boolean otherChar;
+			String decodedString = "";
+			
+			for (int i = 0; i < noSpaceLen; ++i)
+			{
+				encodedChar = noSpaces.charAt(i);
+				alphabetic = (Character.isAlphabetic(encodedChar));
+				numeric = Character.isDigit(encodedChar);
+				otherChar = !(alphabetic || numeric);
+				
+				if (alphabetic)
+				{
+					System.out.println(encodedChar + " is alphabetic!");
+					System.out.println(encodedChar);
+					decodedChar = decoder.get(encodedChar);
+					System.out.println("Encoded char is: " + encodedChar + " and decoded char is: " + decodedChar);
+					decodedString += decodedChar;
+					System.out.println("Decoded string so far: " + decodedString);
+					
+				}
+				else if (numeric)
+				{
+					System.out.println(encodedChar + " is numeric!");
+					decodedChar = encodedChar;
+					decodedString += decodedChar;
+					System.out.println("Decoded string so far: " + decodedString);
+					
+				}
+				else if (otherChar)
+				{
+					System.out.println(encodedChar + " is neither numeric nor alphabetic!");
+				}
+				else
+				{
+					System.out.println(encodedChar + "is something else you haven't accounted for!");
+				}
+				
+				
+				
+			}
+			
+			return decodedString;
 		}
+	
 	}
-
 	/**
 	 * 13. (Optional) The ISBN-10 verification process is used to validate book identification
 	 * numbers. These normally contain dashes and look like: 3-598-21508-8
@@ -378,7 +986,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isValidIsbn(String string) {
+	public boolean isValidIsbn(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return false;
 	}
@@ -392,7 +1001,8 @@ public class EvaluationService {
 	 * @param given
 	 * @return
 	 */
-	public Temporal getGigasecondDate(Temporal given) {
+	public Temporal getGigasecondDate(Temporal given) 
+	{
 		// TODO Write an implementation for this method declaration
 		return null;
 	}
@@ -425,7 +1035,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int solveWordProblem(String string) {
+	public int solveWordProblem(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
